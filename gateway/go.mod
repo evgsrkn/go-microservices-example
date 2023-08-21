@@ -1,4 +1,4 @@
-module gateway
+module github.com/evgsrkn/go-microservices-example/gateway
 
 go 1.18
 
