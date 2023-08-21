@@ -8,7 +8,7 @@ import (
 	"go.uber.org/zap"
 )
 
-type RepositoryI interface {
+type IRepository interface {
 	GetById(id int) (*model.Task, error)
 	GetAll() ([]*model.Task, error)
 	Update(task *model.Task) error
