@@ -1,5 +1,7 @@
 package main
 
-func main() {
+import "task/internal/app"
 
+func main() {
+	app.Run()
 }

@@ -51,13 +51,13 @@ func (db *storage) GetAll() ([]*model.Task, error) {
 	var tasks []*model.Task
 
 	rows, err := db.Query(context.Background(), "SELECT * FROM tasks")
-	defer rows.Close()
 	if err != nil {
 		return nil, errors.Wrap(err, "can't get all tasks")
 	}
+	defer rows.Close()
 
 	for rows.Next() {
-		var task *model.Task
+		var task model.Task
 		err := rows.Scan(
 			&task.ID,
 			&task.Name,
@@ -70,7 +70,7 @@ func (db *storage) GetAll() ([]*model.Task, error) {
 			return nil, errors.Wrap(err, "can't get all tasks")
 		}
 
-		tasks = append(tasks, task)
+		tasks = append(tasks, &task)
 	}
 
 	db.log.Debug("Found all tasks")
@@ -106,7 +106,7 @@ func (db *storage) Create(task *model.Task) error {
 
 	rows, err := db.Query(
 		context.Background(),
-		"INSERT INTO tasks(name, description, project_id, user_id, status) VALUES($1,$2,$3,$4) RETURNING id",
+		"INSERT INTO tasks(name, description, project_id, user_id, status) VALUES($1,$2,$3,$4,$5) RETURNING id",
 		task.Name,
 		task.Description,
 		task.Project_id,

@@ -1,4 +1,4 @@
-include ./config/development.env
+include ./config/dev.env
 
 OUT_DIR=$(PWD)/pkg/pb
 POSTGRESQL_URL="postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable"
@@ -9,7 +9,7 @@ PROTO=docker run --rm -v "$(PWD):/defs" namely/protoc-all -f ./pkg/pb/task.proto
 .PHONY: migrate-up migrate-down migrate-new migrate-force
 
 daemon:
-	APP_ENV=development CompileDaemon \
+	APP_ENV=dev CompileDaemon \
 		--build="go build -o ./bin/task ./cmd/task/main.go" \
 		--command="./bin/task" \
 		-graceful-kill \

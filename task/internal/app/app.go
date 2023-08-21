@@ -5,13 +5,14 @@ import (
 	"net"
 	"sync"
 
-	"gateway/pkg/logger"
-	"gateway/pkg/rpc"
 	"task/internal/config"
 	"task/internal/database"
 	"task/internal/server"
 	"task/internal/task"
 	"task/pkg/pb"
+
+	"github.com/evgsrkn/go-microservices-example/gateway/pkg/logger"
+	"github.com/evgsrkn/go-microservices-example/gateway/pkg/rpc"
 
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
@@ -46,7 +47,7 @@ func CreateApp() fx.Option {
 
 			func(logger *zap.Logger) *grpc.Server {
 				return rpc.New(
-					rpc.WithLoggerLogrus(logger),
+					rpc.WithZapLogger(logger),
 				)
 			},
 		),

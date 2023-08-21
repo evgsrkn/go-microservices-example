@@ -8,11 +8,11 @@ services:
     ports:
       - 8085:8085
     environment:
-      APP_ENV: production
+      APP_ENV: dev
     networks:
-      go-ms-examle:
+      go-microservices-examle:
         ipv4_address: 192.168.0.10
 
 networks:
-  go-ms-examle:
+  go-microservices-examle:
     external: true

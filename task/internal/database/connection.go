@@ -11,7 +11,7 @@ import (
 func New(cfg *config.Cfg) *pgx.Conn {
 	dsn := fmt.Sprintf(
 		"postgres://%s:%s@%s:%s/%s?sslmode=disable",
-		cfg.DB.Username,
+		cfg.DB.User,
 		cfg.DB.Password,
 		cfg.DB.Host,
 		cfg.DB.Port,

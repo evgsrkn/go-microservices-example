@@ -15,27 +15,42 @@ type (
 		Host     string `env:"DB_HOST"`
 		Port     string `env:"DB_PORT"`
 		Name     string `env:"DB_NAME"`
-		Username string `env:"DB_USERNAME"`
+		User     string `env:"DB_USER"`
 		Password string `env:"DB_PASSWORD"`
 	}
+
+	option func(*Cfg)
 )
 
 func New() *Cfg {
 	appEnv := os.Getenv("APP_ENV")
 	if appEnv == "dev" {
-		return loadConfig("./config/dev.env")
+		return load(
+			readFrom(
+				"./config/dev.env",
+			),
+		)
 	}
 
 	return nil
 }
 
-func loadConfig(path string) *Cfg {
+func load(opts ...option) *Cfg {
 	var cfg Cfg
-
-	err := cleanenv.ReadConfig(path, cfg)
-	if err != nil {
-		panic(err)
+	for _, option := range opts {
+		option(&cfg)
 	}
 
 	return &cfg
+}
+
+func readFrom(paths ...string) option {
+	return func(c *Cfg) {
+		for _, path := range paths {
+			err := cleanenv.ReadConfig(path, c)
+			if err != nil {
+				panic(err)
+			}
+		}
+	}
 }
