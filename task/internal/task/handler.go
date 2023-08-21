@@ -1,8 +1,9 @@
 package task
 
 import (
-	"go-microservices-example/task/pkg/pb"
+	"context"
 	"task/internal/task/model"
+	"task/pkg/pb"
 
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -16,11 +17,11 @@ type (
 	}
 
 	IHandler interface {
-		GetAllTasks(_ *pb.Empty) (*pb.TasksList, error)
-		GetTaskById(task *pb.TaskWithID) (*pb.Task, error)
-		UpdateTask(task *pb.Task) (*pb.Task, error)
-		DeleteTask(task *pb.TaskWithID) (*pb.Empty, error)
-		CreateTask(task *pb.Task) (*pb.Empty, error)
+		GetAllTasks(c context.Context, _ *pb.Empty) (*pb.TasksList, error)
+		GetTaskById(c context.Context, task *pb.TaskWithID) (*pb.Task, error)
+		UpdateTask(c context.Context, task *pb.Task) (*pb.Task, error)
+		DeleteTask(c context.Context, task *pb.TaskWithID) (*pb.Empty, error)
+		CreateTask(c context.Context, task *pb.Task) (*pb.Empty, error)
 	}
 )
 
@@ -28,7 +29,7 @@ func NewHandler(service IService, log *zap.Logger, server *grpc.Server) IHandler
 	return &taskHandler{service, log, server}
 }
 
-func (h *taskHandler) GetAllTasks(_ *pb.Empty) (*pb.TasksList, error) {
+func (h *taskHandler) GetAllTasks(c context.Context, _ *pb.Empty) (*pb.TasksList, error) {
 	tasks, err := h.service.GetAllTasks()
 	if err != nil {
 		return nil, err
@@ -49,7 +50,7 @@ func (h *taskHandler) GetAllTasks(_ *pb.Empty) (*pb.TasksList, error) {
 	return &pbtasks, nil
 }
 
-func (h *taskHandler) GetTaskById(request *pb.TaskWithID) (*pb.Task, error) {
+func (h *taskHandler) GetTaskById(c context.Context, request *pb.TaskWithID) (*pb.Task, error) {
 	task, err := h.service.GetTaskById(int(request.Id))
 	if err != nil {
 		return nil, err
@@ -65,7 +66,7 @@ func (h *taskHandler) GetTaskById(request *pb.TaskWithID) (*pb.Task, error) {
 	}, nil
 }
 
-func (h *taskHandler) UpdateTask(request *pb.Task) (*pb.Task, error) {
+func (h *taskHandler) UpdateTask(c context.Context, request *pb.Task) (*pb.Task, error) {
 	task, err := h.service.UpdateTask(&model.Task{
 		ID:          int(request.Id),
 		Name:        request.Name,
@@ -88,7 +89,7 @@ func (h *taskHandler) UpdateTask(request *pb.Task) (*pb.Task, error) {
 	}, nil
 }
 
-func (h *taskHandler) DeleteTask(task *pb.TaskWithID) (*pb.Empty, error) {
+func (h *taskHandler) DeleteTask(c context.Context, task *pb.TaskWithID) (*pb.Empty, error) {
 	if err := h.service.DeleteTask(int(task.Id)); err != nil {
 		return nil, err
 	}
@@ -96,7 +97,7 @@ func (h *taskHandler) DeleteTask(task *pb.TaskWithID) (*pb.Empty, error) {
 	return &pb.Empty{}, nil
 }
 
-func (h *taskHandler) CreateTask(request *pb.Task) (*pb.Empty, error) {
+func (h *taskHandler) CreateTask(c context.Context, request *pb.Task) (*pb.Empty, error) {
 	err := h.service.CreateTask(&model.Task{
 		Name:        request.Name,
 		Description: request.Description,
