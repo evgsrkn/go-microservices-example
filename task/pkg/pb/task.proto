@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "./pkg/pb";
+
+package task;
+
+service TaskService {
+    rpc GetTaskById(TaskWithID) returns (Task) {}
+    rpc GetAllTasks(Empty) returns (TasksList) {}
+    rpc UpdateTask(Task) returns (Task) {}
+    rpc DeleteTask(TaskWithID) returns (Empty) {}
+    rpc CreateTask(Task) returns (Empty) {}
+}
+
+message Task {
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    int64 project_id = 4;
+    int64 user_id = 5;
+    string status = 6;
+}
+
+message TasksList {
+    repeated Task tasks = 1;
+}
+
+message TaskWithID {
+    int64 id = 1;
+}
+
+message Empty {}
