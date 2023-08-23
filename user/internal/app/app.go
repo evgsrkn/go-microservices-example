@@ -5,11 +5,11 @@ import (
 	"net"
 	"sync"
 
-	"github.com/evgsrkn/go-microservices-example/task/internal/config"
-	"github.com/evgsrkn/go-microservices-example/task/internal/database"
-	"github.com/evgsrkn/go-microservices-example/task/internal/server"
-	"github.com/evgsrkn/go-microservices-example/task/internal/task"
-	"github.com/evgsrkn/go-microservices-example/task/pkg/pb"
+	"github.com/evgsrkn/go-microservices-example/user/internal/config"
+	"github.com/evgsrkn/go-microservices-example/user/internal/database"
+	"github.com/evgsrkn/go-microservices-example/user/internal/server"
+	"github.com/evgsrkn/go-microservices-example/user/internal/user"
+	"github.com/evgsrkn/go-microservices-example/user/pkg/pb"
 
 	"github.com/evgsrkn/go-microservices-example/gateway/pkg/logger"
 	"github.com/evgsrkn/go-microservices-example/gateway/pkg/rpc"
@@ -39,9 +39,9 @@ func CreateApp() fx.Option {
 				return &mu
 			},
 
-			fx.Annotate(task.NewStorage, fx.As(new(task.IRepository))),
-			fx.Annotate(task.NewService, fx.As(new(task.IService))),
-			fx.Annotate(task.NewHandler, fx.As(new(task.IHandler))),
+			fx.Annotate(user.NewStorage, fx.As(new(user.IRepository))),
+			fx.Annotate(user.NewService, fx.As(new(user.IService))),
+			fx.Annotate(user.NewHandler, fx.As(new(user.IHandler))),
 
 			server.NewAPI,
 
@@ -56,7 +56,7 @@ func CreateApp() fx.Option {
 }
 
 func serve(logger *zap.Logger, srv *grpc.Server, cfg *config.Cfg, api *server.API) {
-	pb.RegisterTaskServiceServer(srv, api)
+	pb.RegisterUserServiceServer(srv, api)
 	reflection.Register(srv)
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", cfg.Port))

@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/evgsrkn/go-microservices-example/task/internal/config"
+	"github.com/evgsrkn/go-microservices-example/user/internal/config"
 
 	"github.com/golang-migrate/migrate/v4"
 )

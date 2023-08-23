@@ -1,7 +1,7 @@
 package task
 
 import (
-	"task/internal/task/model"
+	"github.com/evgsrkn/go-microservices-example/task/internal/task/model"
 
 	"github.com/pkg/errors"
 )

@@ -1,6 +1,6 @@
 package main
 
-import "task/internal/app"
+import "github.com/evgsrkn/go-microservices-example/task/internal/app"
 
 func main() {
 	app.Run()

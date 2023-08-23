@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  task-service:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 8085:8085
+    environment:
+      APP_ENV: dev
+    networks:
+      go-microservices-examle:
+        ipv4_address: 192.168.0.10
+
+networks:
+  go-microservices-examle:
+    external: true

@@ -1,6 +1,6 @@
 package server
 
-import "task/internal/task"
+import "github.com/evgsrkn/go-microservices-example/task/internal/task"
 
 type (
 	TaskHandler task.IHandler

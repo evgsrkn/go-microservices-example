@@ -2,7 +2,8 @@ package task
 
 import (
 	"context"
-	"task/internal/task/model"
+
+	"github.com/evgsrkn/go-microservices-example/task/internal/task/model"
 
 	"github.com/pkg/errors"
 	"go.uber.org/zap"

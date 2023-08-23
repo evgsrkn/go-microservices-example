@@ -8,19 +8,9 @@ import (
 
 type (
 	Cfg struct {
-		Port     string `env:"PORT"`
-		DB       DB
-		Services Services
+		Port string `env:"PORT"`
+		DB   DB
 	}
-
-	Services struct {
-		User SvcConfig `yaml:"user"`
-	}
-
-	SvcConfig struct {
-		Host string `yaml:"host"`
-	}
-
 	DB struct {
 		Host     string `env:"DB_HOST"`
 		Port     string `env:"DB_PORT"`
@@ -38,7 +28,6 @@ func New() *Cfg {
 		return load(
 			readFrom(
 				"./config/dev.env",
-				"./config/services.dev.yaml",
 			),
 		)
 	}

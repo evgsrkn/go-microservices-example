@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/evgsrkn/go-microservices-example/task/internal/config"
+	"github.com/evgsrkn/go-microservices-example/user/internal/config"
 
 	"github.com/jackc/pgx/v5"
 )
