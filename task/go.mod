@@ -3,7 +3,8 @@ module github.com/evgsrkn/go-microservices-example/task
 go 1.21.0
 
 require (
-	github.com/evgsrkn/go-microservices-example/gateway v0.0.0-20230821210950-80a1b857f612
+	github.com/evgsrkn/go-microservices-example/gateway v0.0.0-20230823125029-c4c091250cec
+	github.com/evgsrkn/go-microservices-example/project v0.0.0-20230823213052-08831e61bfd8
 	github.com/evgsrkn/go-microservices-example/user v0.0.0-20230823102726-2786104c94c3
 	github.com/golang-migrate/migrate/v4 v4.16.2
 	github.com/ilyakaznacheev/cleanenv v1.5.0

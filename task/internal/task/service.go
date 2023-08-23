@@ -3,9 +3,11 @@ package task
 import (
 	"context"
 
+	project_pb "github.com/evgsrkn/go-microservices-example/project/pkg/pb"
+	"github.com/evgsrkn/go-microservices-example/task/internal/project"
 	"github.com/evgsrkn/go-microservices-example/task/internal/task/model"
 	"github.com/evgsrkn/go-microservices-example/task/internal/user"
-	"github.com/evgsrkn/go-microservices-example/user/pkg/pb"
+	user_pb "github.com/evgsrkn/go-microservices-example/user/pkg/pb"
 
 	"github.com/pkg/errors"
 )
@@ -20,13 +22,14 @@ type (
 	}
 
 	service struct {
-		repo       IRepository
-		userClient user.Client
+		repo          IRepository
+		userClient    user.Client
+		projectClient project.Client
 	}
 )
 
-func NewService(repo IRepository, userClient user.Client) IService {
-	return &service{repo, userClient}
+func NewService(repo IRepository, userClient user.Client, projectClient project.Client) IService {
+	return &service{repo, userClient, projectClient}
 }
 
 func (s *service) DeleteTask(id int) error {
@@ -53,6 +56,10 @@ func (s *service) UpdateTask(task *model.Task) (*model.Task, error) {
 		return nil, err
 	}
 
+	if err := s.checkProjectExistence(task.Project_id); err != nil {
+		return nil, err
+	}
+
 	if err := s.repo.Update(task); err != nil {
 		return nil, errors.Wrap(err, "can't update task")
 	}
@@ -67,6 +74,10 @@ func (s *service) UpdateTask(task *model.Task) (*model.Task, error) {
 
 func (s *service) CreateTask(task *model.Task) error {
 	if err := s.checkUserExistence(task.User_id); err != nil {
+		return err
+	}
+
+	if err := s.checkProjectExistence(task.Project_id); err != nil {
 		return err
 	}
 
@@ -90,11 +101,24 @@ func (s *service) GetTaskById(id int) (*model.Task, error) {
 func (s *service) checkUserExistence(id int) error {
 	_, err := s.userClient.GetUserById(
 		context.Background(),
-		&pb.UserWithID{Id: int64(id)},
+		&user_pb.UserWithID{Id: int64(id)},
 	)
 
 	if err != nil {
 		return errors.Wrap(err, "user doesn`t exist")
+	}
+
+	return nil
+}
+
+func (s *service) checkProjectExistence(id int) error {
+	_, err := s.projectClient.GetProjectById(
+		context.Background(),
+		&project_pb.ProjectWithID{Id: int64(id)},
+	)
+
+	if err != nil {
+		return errors.Wrap(err, "project doesn`t exist")
 	}
 
 	return nil

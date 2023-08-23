@@ -14,7 +14,8 @@ type (
 	}
 
 	Services struct {
-		User SvcConfig `yaml:"user"`
+		User    SvcConfig `yaml:"user"`
+		Project SvcConfig `yaml:"project"`
 	}
 
 	SvcConfig struct {

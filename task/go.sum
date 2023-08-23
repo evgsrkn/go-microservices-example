@@ -16,8 +16,10 @@ github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymF
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
-github.com/evgsrkn/go-microservices-example/gateway v0.0.0-20230821210950-80a1b857f612 h1:SjNzoYkW88yJHG+EWkec8Kf9XQ0mjDuZfqOxMKDD/cE=
-github.com/evgsrkn/go-microservices-example/gateway v0.0.0-20230821210950-80a1b857f612/go.mod h1:S0yOD2gvoonSta+oENPOb0yiZqTSc/6iQXKnglw5Z20=
+github.com/evgsrkn/go-microservices-example/gateway v0.0.0-20230823125029-c4c091250cec h1:LkXmiuShGUW/N/cKpaVnKUhupZ41DBedum9E0Pzdba8=
+github.com/evgsrkn/go-microservices-example/gateway v0.0.0-20230823125029-c4c091250cec/go.mod h1:S0yOD2gvoonSta+oENPOb0yiZqTSc/6iQXKnglw5Z20=
+github.com/evgsrkn/go-microservices-example/project v0.0.0-20230823213052-08831e61bfd8 h1:BnrFXCNAiq1fh000Z3F2Hltkt0Yj4PfbFFgdxfr7GEA=
+github.com/evgsrkn/go-microservices-example/project v0.0.0-20230823213052-08831e61bfd8/go.mod h1:T1FZBNvW39fmguw2QmVkYbGE+t73FV1kr3/xPDXEnhU=
 github.com/evgsrkn/go-microservices-example/user v0.0.0-20230823102726-2786104c94c3 h1:4Q+nhwMLO1+PPpy1KjFlnLNPDK7WEFoCLZaIAU4Bhnk=
 github.com/evgsrkn/go-microservices-example/user v0.0.0-20230823102726-2786104c94c3/go.mod h1:uCIeGFPw6339vbnr7mSNjZKtnv51ahxxIZtO2ERhmuY=
 github.com/go-kit/log v0.1.0/go.mod h1:zbhenjAZHb184qTLMA9ZjW7ThYL0H2mk7Q6pNt4vbaY=
