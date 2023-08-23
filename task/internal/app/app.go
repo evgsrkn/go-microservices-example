@@ -9,6 +9,7 @@ import (
 	"github.com/evgsrkn/go-microservices-example/task/internal/database"
 	"github.com/evgsrkn/go-microservices-example/task/internal/server"
 	"github.com/evgsrkn/go-microservices-example/task/internal/task"
+	user "github.com/evgsrkn/go-microservices-example/task/internal/user"
 	"github.com/evgsrkn/go-microservices-example/task/pkg/pb"
 
 	"github.com/evgsrkn/go-microservices-example/gateway/pkg/logger"
@@ -42,6 +43,7 @@ func CreateApp() fx.Option {
 			fx.Annotate(task.NewStorage, fx.As(new(task.IRepository))),
 			fx.Annotate(task.NewService, fx.As(new(task.IService))),
 			fx.Annotate(task.NewHandler, fx.As(new(task.IHandler))),
+			fx.Annotate(user.NewClient, fx.As(new(user.Client))),
 
 			server.NewAPI,
 

@@ -4,6 +4,7 @@ go 1.21.0
 
 require (
 	github.com/evgsrkn/go-microservices-example/gateway v0.0.0-20230821210950-80a1b857f612
+	github.com/evgsrkn/go-microservices-example/user v0.0.0-20230823102726-2786104c94c3
 	github.com/golang-migrate/migrate/v4 v4.16.2
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	github.com/jackc/pgx/v5 v5.4.3
@@ -23,7 +24,6 @@ require (
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
-	github.com/rogpeppe/go-internal v1.6.1 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/dig v1.17.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
